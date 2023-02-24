@@ -196,8 +196,7 @@
     <label for="">sqli test</label>
     <hr>
     <?php
-        shell_exec($input);
-        eval("echo ".$input.";");
+        echo "input";
     ?>
     <label for="">command injection test</label>
     <hr>
