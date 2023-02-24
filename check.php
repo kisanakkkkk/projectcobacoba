@@ -181,8 +181,12 @@
     <label for="">xss test</label>
     <hr>
     <?php
-        $query = "SELECT * FROM users WHERE username = '$input';";
-        $result = $connection->query($query);
+        $query = "SELECT * FROM users WHERE username = ?;";
+        $stmt = $connection->prepare($query);
+        $stmt->bind_param("s", $filter_query);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
             echo 'id: ' . $row['id'] . '<br>';         

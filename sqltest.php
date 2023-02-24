@@ -23,7 +23,7 @@
             die();
         }
 
-		$query = "SELECT * FROM products WHERE $filter_column = ?;";
+		$query = "SELECT * FROM products WHERE username = ?;";
 		$stmt = $connection->prepare($query);
 		$stmt->bind_param("s", $filter_query);
 		$stmt->execute();
