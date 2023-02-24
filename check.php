@@ -177,7 +177,7 @@
         <br>
         <button>send</button>
     </form>
-    <?php echo $input;    ?>
+    <?php echo "input";    ?>
     <label for="">xss test</label>
     <hr>
     <?php

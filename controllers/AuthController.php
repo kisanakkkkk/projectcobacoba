@@ -20,10 +20,13 @@
         if(isset($_POST['username']) && isset($_POST['password'])){
            $username = $_POST['username'];
            $password = $_POST['password'];
-            $hash = sha1($password);
-           $query = "SELECT * FROM users WHERE username = '$username' AND password = '$hash';";
+            $hash = hash('sha256', $password);
+           $query = "SELECT * FROM users WHERE username = ? AND password = ?;";
+           $stmt = $connection->prepare($query);
+           $stmt->bind_param("s", $filter_query);
+           $stmt->execute();
 
-           $result = $connection->query($query);
+           $result = $stmt->get_result();
            if ($result !== false && $result->num_rows > 0){
             $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
             $user_agent = $_SERVER['HTTP_USER_AGENT'];
